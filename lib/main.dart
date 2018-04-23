@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:plus_1_up/client.dart';
 
 void main() => runApp(new MyApp());
 
@@ -31,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Map<String, dynamic> receivedResponse;
-  List data;
+  List<Client> clients = List();
 
   Future<String> getData() async {
     var response = await http.get(
@@ -39,11 +40,11 @@ class _MyHomePageState extends State<MyHomePage> {
         headers: {"Accept": "application/json"});
 
     this.setState(() {
-      print(response.body);
       receivedResponse = json.decode(response.body);
-      data = receivedResponse['data'];
+      for (var value in receivedResponse['data']) {
+        clients.add(Client.fromJson(value));
+      }
     });
-    print(receivedResponse);
 
     return "Success!";
   }
@@ -61,10 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text("Listviews"),
       ),
       body: new ListView.builder(
-        itemCount: data == null ? 0 : data.length,
+        itemCount: clients == null ? 0 : clients.length,
         itemBuilder: (BuildContext context, int index) {
           return new Card(
-            child: new Text(data[index]["mail_address"]),
+            child: new Text(clients[index].name),
           );
         },
       ),
