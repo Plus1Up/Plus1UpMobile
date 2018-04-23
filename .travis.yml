@@ -1,19 +1,21 @@
 os:
-  - linux
+- linux
 sudo: false
 addons:
   apt:
-    # Flutter depends on /usr/lib/x86_64-linux-gnu/libstdc++.so.6 version GLIBCXX_3.4.18
     sources:
-      - ubuntu-toolchain-r-test # if we don't specify this, the libstdc++6 we get is the wrong version
+    - ubuntu-toolchain-r-test
     packages:
-      - libstdc++6
-      - fonts-droid
+    - libstdc++6
+    - fonts-droid
 before_script:
-  - git clone https://github.com/flutter/flutter.git -b beta
-  - ./flutter/bin/flutter doctor
+- git clone https://github.com/flutter/flutter.git -b beta
+- "./flutter/bin/flutter doctor"
 script:
-  - ./flutter/bin/flutter test
+- "./flutter/bin/flutter test"
 cache:
   directories:
-    - $HOME/.pub-cache
+  - "$HOME/.pub-cache"
+notifications:
+  slack:
+    secure: fy7MHTbtpv4ltuuxNsIZEh46ayZVD7TAMbltuiukEurf4U/3e8V0rVJ8jKKnitWfKATb4km7wwHA4sEWSLYSJe8/Sgyhj0rfaiOlEsPjaoRSfDCSKr9eXWS4dWA2URkgQB14JeKGKlPoZoiKIltpc32JBF6UxsFKkz0cYiSs9VRQ/Hu7rzLKJzvCzOm52ee6P30CaMA8xGCkBl8qghz6G4F68TpqdNaABpGbwW31BKa5GHzMHBjZ+2Wc+DPknKGwJXQLHZAottUh55D0YIMzsM3Mg4MNPxz1E2K4Jap3Kb1B/bYsHrmF5Vud0pNmJUjRcphA6ViwakPJt4k+XrtCtDRIepGat/p0+O+c/nrInUC81p2g4amLijiT4Bb+wc1shh1QrN2RAkCdO3sFCH5GXLR3+hYOkog9vi2O93+Qs5AJqmrO/tztlv2JnRc/3Y4NnWazrGBSnG5WAsLjzr711iGD8ENbYZIRmIguQyD7RICmQ/r8rNlrz6jJMOjCJptBb3EGCr3N/x0mCdGF4GJ4RAYb3TwhpMurL0qyUicD/Q1529k7T9IRwtZKXV/O6lc9PehJ/Wj90zneqOLAo0g5riP3lZfVg4NpgWjgPn6cakyBzSBAiG1rg+pjSRT/Jmp6xj7QKTIvSYj42Fmr4eHIUglXR5XQIKBwsnhDJpqbniE=
